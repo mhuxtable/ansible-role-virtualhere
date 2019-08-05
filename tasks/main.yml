@@ -22,6 +22,13 @@
       mode: 0644
     notify: reload systemd
 
+  - name: ensure config file directory exists
+    file:
+      src: "{{ virtualhere__server_config_file_path|dirname }}"
+      owner: root
+      group: root
+      mode: 0755
+
   - name: generate VirtualHere configuration file
     template:
       src: config.ini.j2
