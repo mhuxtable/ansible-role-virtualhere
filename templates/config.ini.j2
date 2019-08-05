@@ -1,0 +1,9 @@
+# {{ ansible_managed }}
+
+ServerName={{ virtualhere__server_name }}"
+{% for nickname in virtualhere__device_nicknames|default([]) -%}
+DeviceNicknames={{ nickname.nickname }},{{ nickname.vendor }},{{ nickname.product }},{{ nickname.address }}
+{%- endfor -%}
+UseAVAHI={{ '1' if virtualhere__use_avahi else '0' }}
+AllowedDevices={{ virtualhere__allowed_devices|join(',') }}
+IgnoredDevices={{ virtualhere__ignored_devices|join(',') }}
