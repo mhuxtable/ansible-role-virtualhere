@@ -1,0 +1,22 @@
+---
+- name: ensure the machine is a supported architecture
+  fail:
+    msg: "This machine does not have a supported architecture. Supported architectures: {{ virtualhere__supported_archs|join(', ') }}"
+  when: ansible_architecture not in virtualhere__supported_archs
+
+- block:
+  - name: download VirtualHere binary
+    get_url:
+      url: "{{ virtualhere__download_base_url }}{{ ansible_architecture }}"
+      dest: "{{ virtualhere__server_binary_path }}"
+      owner: root
+      group: root
+      mode: 0755
+  when: virtualhere__server_enabled
+
+- block:
+  - name: remove VirtualHere binary
+    file:
+      path: "{{ virtualhere__server_binary_path }}"
+      state: absent
+  when: not virtualhere__server_enabled

@@ -1,0 +1,14 @@
+---
+virtualhere__download_base_url: "https://virtualhere.com/sites/default/files/usbserver/vhusbd"
+virtualhere__supported_archs:
+  - i386
+  - x86_64
+  - arm
+  - arm64
+  - mips
+  - mipsel
+
+virtualhere__server_binary_dirpath: "/usr/local/bin"
+virtualhere__server_binary_path: "{{ virtualhere__server_binary_dirpath }}/vhusbd{{ ansible_architecture }}"
+
+virtualhere__server_enabled: yes
