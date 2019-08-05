@@ -8,7 +8,22 @@ virtualhere__supported_archs:
   - mips
   - mipsel
 
-virtualhere__server_binary_dirpath: "/usr/local/bin"
+virtualhere__server_binary_dirpath: "/usr/local/sbin"
 virtualhere__server_binary_path: "{{ virtualhere__server_binary_dirpath }}/vhusbd{{ ansible_architecture }}"
 
 virtualhere__server_enabled: yes
+virtualhere__server_config_file_path: /etc/virtualhere/config.ini
+
+# Config directives
+virtualhere__server_name: "{{ ansible_fqdn }}"
+
+# virtualhere__device_nicknames is a list of nicknames in the following format:
+# - nickname: "Friendly Name"
+#   vendor: "<vendor hex value>"
+#   product: "<product hex value>"
+#   address: "<address decimal>"
+virtualhere__device_nicknames: {}
+virtualhere__use_avahi: yes
+
+virtualhere__allowed_devices: []
+virtualhere__ignored_devices: []

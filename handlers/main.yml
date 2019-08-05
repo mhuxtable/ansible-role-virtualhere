@@ -1,2 +1,9 @@
 ---
-# handlers file for ansible-role-virtualhere
+- name: restart virtualhere
+  service:
+    name: virtualhere
+    state: restarted
+
+- name: reload systemd
+  systemd:
+    daemon_reload: yes

@@ -12,11 +12,49 @@
       owner: root
       group: root
       mode: 0755
+
+  - name: ensure systemd configuration file is generated
+    template:
+      src: systemd-unit.service.j2
+      dest: /etc/systemd/system/virtualhere.service
+      owner: root
+      group: root
+      mode: 0644
+    notify: reload systemd
+
+  - name: ensure config file directory exists
+    file:
+      path: "{{ virtualhere__server_config_file_path|dirname }}"
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+
+  - name: generate VirtualHere configuration file
+    template:
+      src: config.ini.j2
+      dest: "{{ virtualhere__server_config_file_path }}"
+      owner: root
+      group: root
+      mode: 0644
+    notify: restart virtualhere
+
+  - name: ensure systemd unit is enabled
+    systemd:
+      daemon_reload: yes
+      name: virtualhere
+      enabled: yes
+      state: started
   when: virtualhere__server_enabled
 
 - block:
-  - name: remove VirtualHere binary
+  - name: remove VirtualHere binary and dependent files
     file:
       path: "{{ virtualhere__server_binary_path }}"
       state: absent
+    with_items:
+      - "{{ virtualhere__server_binary_path }}"
+      - "{{ virtualhere__server_config_file_path }}"
+      - /etc/systemd/system/virtualhere.service
+    notify: reload systemd
   when: not virtualhere__server_enabled
