@@ -24,7 +24,7 @@
 
   - name: ensure config file directory exists
     file:
-      src: "{{ virtualhere__server_config_file_path|dirname }}"
+      path: "{{ virtualhere__server_config_file_path|dirname }}"
       owner: root
       group: root
       mode: 0755
