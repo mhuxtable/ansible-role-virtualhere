@@ -1,0 +1,11 @@
+# {{ ansible_managed }}
+[Unit]
+Description=VirtualHere USB Sharing
+Requires=networking.service
+After=networking.service
+[Service]
+ExecStartPre=/bin/sh -c 'logger VirtualHere settling...;sleep 1s;logger VirtualHere settled'
+ExecStart={{ virtualhere__server_binary_path }} -c {{ virtualhere__server_config_file_path }}
+Type=idle
+[Install]
+WantedBy=multi-user.target
