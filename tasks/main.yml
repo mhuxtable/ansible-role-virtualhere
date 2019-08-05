@@ -28,6 +28,7 @@
       owner: root
       group: root
       mode: 0755
+      state: directory
 
   - name: generate VirtualHere configuration file
     template:
