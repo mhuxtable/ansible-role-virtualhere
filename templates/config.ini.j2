@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
 
-ServerName={{ virtualhere__server_name }}"
+ServerName={{ virtualhere__server_name }}
 {% for nickname in virtualhere__device_nicknames|default([]) -%}
 DeviceNicknames={{ nickname.nickname }},{{ nickname.vendor }},{{ nickname.product }},{{ nickname.address }}
 {%- endfor -%}

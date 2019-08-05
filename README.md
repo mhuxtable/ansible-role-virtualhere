@@ -42,7 +42,7 @@ The path to the VirtualHere configuration file (see next section to configure it
 ## Configuration file
 
 ```
-virtualhere__server_name: "{{ ansible_hostname }}"
+virtualhere__server_name: "{{ ansible_fqdn }}"
 
 # virtualhere__device_nicknames is a list of nicknames in the following format:
 # - nickname: "Friendly Name"

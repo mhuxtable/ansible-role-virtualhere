@@ -15,7 +15,7 @@ virtualhere__server_enabled: yes
 virtualhere__server_config_file_path: /etc/virtualhere/config.ini
 
 # Config directives
-virtualhere__server_name: "{{ ansible_hostname }}"
+virtualhere__server_name: "{{ ansible_fqdn }}"
 
 # virtualhere__device_nicknames is a list of nicknames in the following format:
 # - nickname: "Friendly Name"
